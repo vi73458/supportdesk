@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: supportdesk-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: supportdesk
+      POSTGRES_USER: supportdesk
+      POSTGRES_PASSWORD: supportdesk123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+volumes:
+  postgres_data:
